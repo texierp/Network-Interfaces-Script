@@ -1,3 +1,5 @@
+#!/usr/bin awk -f
+
 function writeStatic(device, fields, orders) {
 
     # Create the order as original
