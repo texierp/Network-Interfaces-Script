@@ -3,8 +3,6 @@
 # wrapper script around changeInterface.awk
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$SCRIPTDIR/common.sh"
-
 INPUTFILE=$1
 TMPFILE=$(mktemp)
 
@@ -13,8 +11,7 @@ if [[ ! -f "$INPUTFILE" ]]; then
     exit 1
 fi
 
-shift
-echo /usr/bin/ask -f "${SCRIPTDIR}/changeInterface.awk $TMPFILE $@
+/usr/bin/awk -f "${SCRIPTDIR}/changeInterface.awk" $@ > "$TMPFILE"
 
 if [[ $? ]]; then
     cp "$TMPFILE" "$INPUTFILE"
