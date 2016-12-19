@@ -2,8 +2,7 @@
 
 # wrapper script around changeInterface.awk
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-INPUTFILE=$1
+INPUTFILE=/etc/network/interfaces
 TMPFILE=$(mktemp)
 
 if [[ ! -f "$INPUTFILE" ]]; then
@@ -11,7 +10,7 @@ if [[ ! -f "$INPUTFILE" ]]; then
     exit 1
 fi
 
-/usr/bin/awk -f "${SCRIPTDIR}/changeInterface.awk" $@ > "$TMPFILE"
+/usr/bin/awk -f "/usr/bin/changeInterface.awk" $@ > "$TMPFILE"
 
 if [[ $? ]]; then
     cp "$TMPFILE" "$INPUTFILE"
